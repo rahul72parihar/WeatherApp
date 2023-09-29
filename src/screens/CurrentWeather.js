@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
+import { weatherType } from "../utils/weatherType";
 
 const CurrentWeather = () => {
   return (
@@ -18,7 +19,7 @@ const CurrentWeather = () => {
       </View>
       <View style={styles.bodyWrapper}>
         <Text style={styles.description}>It's Sunny</Text>
-        <Text style={styles.message}>It's Perfect Weather</Text>
+        <Text style={styles.message}>{weatherType["Thunderstorm"].message}</Text>
       </View>
     </SafeAreaView>
   );
