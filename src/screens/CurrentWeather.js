@@ -4,22 +4,29 @@ import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { weatherType } from "../utils/weatherType";
 
-const CurrentWeather = () => {
+const CurrentWeather = ({ weatherData }) => {
+  const {
+    main: { temp, feels_like, temp_max, temp_min },
+    weather,
+  } = weatherData;
+  const weatheCondition = weather[0].main;
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: weatherType[weatheCondition].backgroundColor }]}
+    >
       <View style={styles.top}>
-        <Feather name="sun" size={100} color="black" />
+        <Feather name={weatherType[weatheCondition].icon} size={100} color="white" />
 
-        <Text style={styles.temp}>6</Text>
-        <Text style={styles.feels}>Feels Like 5</Text>
+        <Text style={styles.temp}>{temp}</Text>
+        <Text style={styles.feels}>Feels Like {feels_like}</Text>
         <View style={styles.highLowContainer}>
-          <Text style={styles.highLow}>High:8</Text>
-          <Text style={styles.highLow}>Low:6</Text>
+          <Text style={styles.highLow}>High:{temp_max}</Text>
+          <Text style={styles.highLow}>Low:{temp_min}</Text>
         </View>
       </View>
       <View style={styles.bodyWrapper}>
-        <Text style={styles.description}>It's Sunny</Text>
-        <Text style={styles.message}>{weatherType["Thunderstorm"].message}</Text>
+        <Text style={styles.description}>{weather[0].description}</Text>
+        <Text style={styles.message}>{weatherType[weatheCondition].message}</Text>
       </View>
     </SafeAreaView>
   );

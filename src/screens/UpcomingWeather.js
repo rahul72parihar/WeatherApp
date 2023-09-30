@@ -1,36 +1,9 @@
 import React from "react";
-import { SafeAreaView, Text, StyleSheet, FlatList, ImageBackground } from "react-native";
+import { SafeAreaView, StyleSheet, FlatList, ImageBackground } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import ListItem from "../components/ListItem";
 
-const UpcomingWeather = () => {
-  const DATA = [
-    {
-      dt: 1661871600,
-      main: {
-        temp_min: 296.76,
-        temp_max: 297.87,
-      },
-      weather: [
-        {
-          main: "Rain",
-        },
-      ],
-    },
-    {
-      dt: 1661871601,
-      main: {
-        temp_min: 296.76,
-        temp_max: 297.87,
-      },
-      weather: [
-        {
-          main: "Rain",
-        },
-      ],
-    },
-  ];
-
+const UpcomingWeather = ({ weatherData }) => {
   const renderItem = ({ item }) => {
     return (
       <ListItem
@@ -44,8 +17,7 @@ const UpcomingWeather = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground style={styles.image} source={require("../../assets/tree.jpg")}>
-        <Text>Upcoming Weather</Text>
-        <FlatList data={DATA} renderItem={renderItem} keyExtractor={(item) => item.dt} />
+        <FlatList data={weatherData} renderItem={renderItem} keyExtractor={(item) => item.dt} />
       </ImageBackground>
     </SafeAreaView>
   );

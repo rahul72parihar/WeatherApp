@@ -14,9 +14,9 @@ const City = () => {
         </View>
         <View style={styles.riseSetWrapper}>
           <Feather name="sunrise" size={50} color={"white"} />
-          <Text style={styles.riseSetText}>10:23:23 AM</Text>
+          <Text style={styles.riseSetText}>7:23:23 AM</Text>
           <Feather name="sunset" size={50} color={"white"} />
-          <Text style={styles.riseSetText}>32:23:23 PM</Text>
+          <Text style={styles.riseSetText}>6:00:23 PM</Text>
         </View>
       </ImageBackground>
     </SafeAreaView>

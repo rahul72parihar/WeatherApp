@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import * as Location from "expo-location";
+
 import Tabs from "./src/components/Tabs";
 import { ActivityIndicator, StyleSheet, View, Text } from "react-native";
+
+import { useGetWeather } from "./src/hooks/useGetWeather";
+
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
-
-  const getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-
-    if (status !== "granted") {
-      setError("permission to access location was denied");
-      return;
-    }
-    let location = await Location.getCurrentPositionAsync({});
-
-    if (location) console.log(location);
-    setLocation(location);
-  };
-
-  useEffect(() => {
-    getLocation();
-  }, []);
+  const [loading, error, weather] = useGetWeather();
 
   if (loading)
     return (
@@ -33,11 +17,13 @@ const App = () => {
         </Text>
       </View>
     );
-  return (
-    <NavigationContainer>
-      <Tabs />
-    </NavigationContainer>
-  );
+  if (error) return <View></View>;
+  if (weather && weather.list)
+    return (
+      <NavigationContainer>
+        <Tabs weather={weather} />
+      </NavigationContainer>
+    );
 };
 const styles = StyleSheet.create({
   container: {
